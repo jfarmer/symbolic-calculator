@@ -1,5 +1,14 @@
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
+
+Style/CyclomaticComplexity:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
@@ -15,6 +24,9 @@ Style/IfUnlessModifier:
   Enabled: false
 
 Style/MethodCallParentheses:
+  Enabled: false
+
+Style/MethodLength:
   Enabled: false
 
 Style/PerlBackrefs:
