@@ -2,14 +2,6 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-# This adds the "lib" directory to the library path, so we can type
-#
-#     require "whatever"
-#
-# instead of
-#
-#     require "./lib/whatever"
-#
 
 require "expression"
 
@@ -17,20 +9,22 @@ bindings = {}
 
 loop do
   print "calc> "
-  input = gets.chomp
+  input = gets
+  input = input.chomp if input # This is here to handle Ctrl+D
 
   case input
-  when "exit"
+  when "exit", nil
     puts "Bye bye!"
     exit
   # e.g., lines that look like x = 20
   when /^([a-z]+)\s*=\s*(-*\d+)$/
-    bindings[$1.to_sym] = $2.to_i
+    bindings[$1] = $2.to_i
   else
     begin
       puts Expression.new(input).evaluate(bindings)
-    rescue StandardError
+    rescue StandardError => err
       puts "Error evaluating RPN expression: #{input.inspect}"
+      puts err
     end
   end
 end
